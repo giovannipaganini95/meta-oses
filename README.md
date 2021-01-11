@@ -60,7 +60,7 @@ KERNEL_MODULE_AUTOLOAD += " myppg"
 bitbake core-image-full-cmdline
 ```
 
-5. Once the build process is completed, we need to copy the fresh new Linux image to a MicroSD in order to boot up our device. It can be done with the following command, taking care of selecting the correct output device (on a native Linux machine it would likely be something such as "dev/mmcblk0"):
+5. Once the build process is completed, we need to copy the fresh new Linux image to a MicroSD in order to boot up our device. It can be done with the following command, taking care of selecting the correct output device (on a native Linux machine it would likely be something such as "/dev/mmcblk0"):
 
 ```
 sudo dd if=tmp/deploy/images/raspberrypi3/core-image-full-cmdline-raspberrypi3.rpi-sdimg of=<output device> bs=1M

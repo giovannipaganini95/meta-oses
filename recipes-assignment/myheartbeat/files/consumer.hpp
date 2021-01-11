@@ -30,7 +30,6 @@ public:
                         array[offset].Im = 0;
                         offset++;
                         if (offset >= N) {
-                            //auto start = std::chrono::steady_clock::now();
                             fft(array.data(), N, scratch.data());
                             offset = 0;
                             for (k = 0; k < N; k++) {
@@ -45,14 +44,6 @@ public:
                                     m = k;
                             }
                             std::cout << "Computed Value: " << std::to_string((m) * 60 * 50 / N) << "bpm" << std::endl;
-
-                            /* std::cout << "Max size: " << std::to_string(max_size) << std::endl;
-                            auto now = std::chrono::steady_clock::now();
-                            auto duration = std::chrono::duration_cast<std::chrono::microseconds>
-                                    (now - start);
-                            start = now;
-                            std::cout << duration.count() << std::endl;
-                            max_size = 0; */
                             offset = 0;
                         }
                     }

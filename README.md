@@ -13,15 +13,15 @@ Yocto custom layer for a Virtual PPG Sensor.
 
 This overlay is inteded to add a virtual PPG Sensor, implemented directly as a Linux Kernel Module, and a simple HeartBeat Monitor app, that relies on the first one. It should works on OpenEmbedded/Yocto distributions and layer stacks. In particular, it was entirely devoloped and tested on Yocto, with raspberrypi3 and quemuarm as targets.
 
-The **PPG Kernel Module** provides the standard Linux open, close and read Kernel Module functionalities, while the write is disabled. More information and details about it can be found [here](https://github.com/giovannipaganini95/meta-oses).
+The **PPG Kernel Module** provides the standard Linux open, close and read Kernel Module functionalities, while the write is disabled. More information and details about it can be found [here](https://github.com/giovannipaganini95/meta-oses/blob/main/recipes-assignment/myppg/README.md).
 
-The **Heartbeat Monitor Application**, instead, is implemented in C++ and prints to the console the mean bbp rate, with a timing of about 41s. It based on the producer/consumer pattern and it is designed to be modular with respect to the time intervals and buffer dimensions, in order to be easily extended or ported to other devices. More detailed information about the program structure can be found [here](https://github.com/giovannipaganini95/meta-oses).
+The **Heartbeat Monitor Application**, instead, is implemented in C++ and prints to the console the mean bbp rate, with a timing of about 41s. It is based on the producer/consumer pattern and it is designed to be modular with respect to the time intervals and buffer dimensions, in order to be easily extended or ported to other devices. More detailed information about the program structure can be found [here](https://github.com/giovannipaganini95/meta-oses/blob/main/recipes-assignment/myheartbeat/README.md).
 
 ## Dependencies
 
 This layer depends on:
 
-* URI: git://git.yoctoproject.org/poky
+* URI: <git://git.yoctoproject.org/poky>
   * branch: dunfell
   * revision: HEAD
 
@@ -35,7 +35,7 @@ The following instructions are intended to add this layer to the Raspberry Pi3 Y
 git clone https://github.com/giovannipaganini95/meta-oses
 ```
     
-2. Once the download has been downloaded, we need to set-up console windows and container for building  the distribution:
+2. Once the download has been completed, we need to set-up console and container for building the distribution, typing in the terminal:
     
 ```
 source oe-init-build-env build_rpi3
@@ -54,13 +54,13 @@ IMAGE_INSTALL_append += " myppg myheartbeat"
 KERNEL_MODULE_AUTOLOAD += " myppg"
 ```
     
-4. We can now build build the image with the following command: 
+1. We can now build the image with the following command: 
 
 ```
 bitbake core-image-full-cmdline
 ```
 
-5. Once the build process is completed, we need to copy the fresh new Linux image to a MicroSD in order to boot up our device. It can be done with the following command, taking care of selecting the correct output device (on a native Linux machine it would likely to be something such as "dev/mmcblk0"):
+5. Once the build process is completed, we need to copy the fresh new Linux image to a MicroSD in order to boot up our device. It can be done with the following command, taking care of selecting the correct output device (on a native Linux machine it would likely be something such as "dev/mmcblk0"):
 
 ```
 sudo dd if=tmp/deploy/images/raspberrypi3/core-image-full-cmdline-raspberrypi3.rpi-sdimg of=<output device> bs=1M
